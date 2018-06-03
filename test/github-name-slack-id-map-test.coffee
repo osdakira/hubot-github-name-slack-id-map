@@ -9,19 +9,25 @@ describe 'github-name-slack-id-map', ->
   beforeEach ->
     @room = helper.createRoom()
 
+    # stub adapter
+    @room.robot.adapter.client =
+      getUserByName: (slackName) -> { id: "slackID" }
+
   afterEach ->
     @room.destroy()
 
-  it 'responds to hello', ->
-    @room.user.say('alice', '@hubot hello').then =>
+  it 'responds to github_to_slack add', ->
+    command = "github_to_slack add githubName as slackName"
+    @room.user.say('alice', "@hubot #{command}").then =>
       expect(@room.messages).to.eql [
-        ['alice', '@hubot hello']
-        ['hubot', '@alice hello!']
+        ["alice", "@hubot github_to_slack add githubName as slackName"],
+        ["hubot", "@alice {\"githubName\":{\"slackName\":\"slackID\"}}"]
       ]
 
-  it 'hears orly', ->
-    @room.user.say('bob', 'just wanted to say orly').then =>
+  it 'responds to github_to_slack remove', ->
+    command = "github_to_slack remove githubName"
+    @room.user.say('alice', "@hubot #{command}").then =>
       expect(@room.messages).to.eql [
-        ['bob', 'just wanted to say orly']
-        ['hubot', 'yarly']
+        ['alice', "@hubot github_to_slack remove githubName"],
+        ["hubot", "@alice {}"]
       ]
