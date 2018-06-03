@@ -1,5 +1,7 @@
 # hubot-github-name-slack-id-map
 
+[![CircleCI](https://circleci.com/gh/osdakira/hubot-github-name-slack-id-map.svg?style=svg)](https://circleci.com/gh/osdakira/hubot-github-name-slack-id-map)
+
 Keep correspondence between github_name and slack_id
 Support tool for converting mentions with other scripts
 
