@@ -33,9 +33,10 @@ module.exports = (robot) ->
     res.reply _getMapToStrng()
 
   _fetchSlackIdByName = (slackName) ->
-    getUserByNameFunc = robot.adapter.client.getUserByName
-    getUserByNameFunc ||= robot.adapter.client.rtm.dataStore.getUserByName
-    getUserByNameFunc(slackName)?.id
+    if robot.adapter.client.getUserByName
+      robot.adapter.client.getUserByName(slackName)?.id
+    else
+      robot.adapter.client.rtm.dataStore.getUserByName(slackName)?.id
 
   _updateMap = (githubName, slackName) ->
     slackId = _fetchSlackIdByName slackName
