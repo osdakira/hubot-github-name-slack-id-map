@@ -21,7 +21,7 @@ describe 'github-name-slack-id-map', ->
     @room.user.say('alice', "@hubot #{command}").then =>
       expect(@room.messages).to.eql [
         ["alice", "@hubot github_to_slack add githubName as slackName"],
-        ["hubot", "@alice {\"githubName\":{\"slackName\":\"slackID\"}}"]
+        ["hubot", "{\"githubName\":{\"slackName\":\"slackID\"}}"]
       ]
 
   it 'responds to github_to_slack remove', ->
@@ -29,5 +29,5 @@ describe 'github-name-slack-id-map', ->
     @room.user.say('alice', "@hubot #{command}").then =>
       expect(@room.messages).to.eql [
         ['alice', "@hubot github_to_slack remove githubName"],
-        ["hubot", "@alice {}"]
+        ["hubot", "{}"]
       ]
