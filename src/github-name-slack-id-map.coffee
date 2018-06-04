@@ -17,20 +17,20 @@ module.exports = (robot) ->
   key = process.env.HUBOT_GITHUB_TO_SLACK_NAME_MAP_KEY || "HUBOT_GITHUB_TO_SLACK_KEY"
 
   robot.respond /github_to_slack$/, (res) ->
-    res.reply _getMapToStrng()
+    res.send _getMapToStrng()
 
   robot.respond /github_to_slack add ([\w-]+) as ([\w\.\'-,]+)$/i, (res) ->
     githubName = res.match[1]
     slackName = res.match[2]
     if _updateMap(githubName, slackName)
-      res.reply _getMapToStrng()
+      res.send _getMapToStrng()
     else
-      res.reply "#{slackName} not found"
+      res.send "#{slackName} not found"
 
   robot.respond /github_to_slack remove (\w+)$/i, (res) ->
     githubName = res.match[1]
     _removeMap githubName
-    res.reply _getMapToStrng()
+    res.send _getMapToStrng()
 
   _fetchSlackIdByName = (slackName) ->
     if robot.adapter.client.getUserByName
