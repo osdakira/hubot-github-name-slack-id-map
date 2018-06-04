@@ -1,7 +1,7 @@
 {
   "name": "hubot-github-name-slack-id-map",
   "description": "Keep correspondence between github_name and slack_id",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Akira Osada <osd.akira@gmail.com>",
   "license": "MIT",
   "keywords": "hubot, hubot-scripts",
