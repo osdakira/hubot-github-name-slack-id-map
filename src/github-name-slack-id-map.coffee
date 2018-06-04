@@ -19,7 +19,7 @@ module.exports = (robot) ->
   robot.respond /github_to_slack$/, (res) ->
     res.reply _getMapToStrng()
 
-  robot.respond /github_to_slack add (\w+) as ([\w\.\'-,]+)$/i, (res) ->
+  robot.respond /github_to_slack add ([\w-]+) as ([\w\.\'-,]+)$/i, (res) ->
     githubName = res.match[1]
     slackName = res.match[2]
     if _updateMap(githubName, slackName)
